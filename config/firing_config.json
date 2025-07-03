@@ -1,0 +1,30 @@
+{
+    "valve_pin": 16,
+    "pressure_sensor_pin": 17,
+    "safety_pin": 18,
+    "fire_duration": 0.1,
+    "min_fire_interval": 1.0,
+    "burst_count": 3,
+    "burst_interval": 0.2,
+    "max_pressure": 100,
+    "safety_timeout": 5.0,
+    
+    "safety_systems": {
+        "pressure_monitoring": true,
+        "safety_switch_required": true,
+        "auto_disarm_timeout": true,
+        "emergency_stop_enabled": true
+    },
+    
+    "operational_limits": {
+        "max_shots_per_minute": 30,
+        "max_continuous_operation": 300,
+        "cooldown_period": 10.0
+    },
+    
+    "gpio_config": {
+        "mode": "BCM",
+        "valve_active_state": "HIGH",
+        "safety_switch_pull": "UP"
+    }
+} 

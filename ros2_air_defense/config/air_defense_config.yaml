@@ -1,0 +1,242 @@
+# ROS2 Air Defense System Configuration
+
+# System-wide parameters
+system:
+  name: "Teknofest Air Defense System"
+  version: "2.0.0"
+  operator_id: "teknofest_team"
+  mission_type: "competition"
+
+# Vision system configuration
+vision:
+  camera_id: 0
+  resolution:
+    width: 640
+    height: 480
+  fps: 30
+  
+  # Detection parameters
+  confidence_threshold: 0.7
+  target_classes: ["red_balloon", "blue_balloon"]
+  publish_annotated: true
+  
+  # YOLO model settings
+  model_path: "Computer_Vision/Mission1/Mission_1.pt"
+  device: "cuda"  # or "cpu"
+
+# Camera calibration
+camera:
+  horizontal_fov: 60.0  # degrees
+  vertical_fov: 45.0    # degrees
+  
+  # Calibration offsets
+  azimuth_offset: 0.0   # degrees
+  elevation_offset: 0.0 # degrees
+  
+  # Lens distortion parameters (if needed)
+  distortion_coefficients: [0.0, 0.0, 0.0, 0.0, 0.0]
+
+# Motor system configuration
+motors:
+  # GPIO pin assignments
+  pins:
+    azimuth_step: 18
+    azimuth_dir: 19
+    azimuth_enable: 20
+    elevation_step: 21
+    elevation_dir: 22
+    elevation_enable: 23
+  
+  # Motor specifications
+  azimuth_motor:
+    steps_per_revolution: 1600
+    max_speed: 1000  # steps/sec
+    acceleration: 500
+    gear_ratio: 5.0
+    
+  elevation_motor:
+    steps_per_revolution: 1600
+    max_speed: 800   # steps/sec
+    acceleration: 400
+    gear_ratio: 4.0
+  
+  # Movement limits
+  limits:
+    azimuth_min: -180.0   # degrees
+    azimuth_max: 180.0    # degrees
+    elevation_min: -90.0  # degrees
+    elevation_max: 90.0   # degrees
+  
+  # Homing configuration
+  homing:
+    speed: 200            # steps/sec for homing
+    timeout: 30.0         # seconds
+    use_limit_switches: false
+
+# Firing system configuration
+firing:
+  # GPIO configuration
+  valve_pin: 16
+  safety_switch_pin: 17
+  pressure_sensor_pin: 27  # ADC pin
+  
+  # Firing parameters
+  valve_duration: 0.15     # seconds
+  pressure_setting: 0.8    # 0.0-1.0
+  
+  # Safety parameters
+  min_fire_interval: 1.0   # seconds between shots
+  max_consecutive_shots: 5
+  auto_disarm_timeout: 5.0 # seconds
+  
+  # Pressure limits
+  pressure_limits:
+    min_safe: 2.0          # bar
+    max_safe: 8.0          # bar
+    operating: 6.0         # bar
+
+# Coordinate transformation
+coordinate_transform:
+  # Calibration matrix (if needed)
+  calibration_matrix: [
+    [1.0, 0.0, 0.0],
+    [0.0, 1.0, 0.0],
+    [0.0, 0.0, 1.0]
+  ]
+  
+  # Target tracking parameters
+  movement_threshold: 5.0  # pixels for moving target detection
+  target_timeout: 2.0      # seconds before target is lost
+  priority_update_rate: 10.0  # Hz
+
+# Targeting and engagement
+targeting:
+  # Priority calculation weights
+  priority_weights:
+    confidence: 0.4
+    distance_to_center: 0.3
+    enemy_bonus: 0.2
+    movement_bonus: 0.1
+  
+  # Engagement parameters
+  priority_threshold: 0.7
+  max_engagement_distance: 150.0  # degrees from center
+  engagement_timeout: 30.0        # seconds
+  
+  # Scan parameters
+  scan_patterns:
+    default:
+      azimuth_range: [-90.0, 90.0]
+      elevation_range: [-45.0, 45.0]
+      scan_speed: 0.5
+      dwell_time: 1.0
+
+# Safety system configuration
+safety:
+  # Safety levels and thresholds
+  levels:
+    secure: 0
+    caution: 1
+    warning: 2
+    critical: 3
+    emergency: 4
+  
+  # Monitoring rates
+  safety_update_rate: 10.0  # Hz
+  health_check_rate: 1.0    # Hz
+  
+  # Emergency stop configuration
+  emergency_stop:
+    enabled: true
+    auto_trigger: true
+    response_time: 0.1      # seconds
+  
+  # Environmental limits
+  environment:
+    max_temperature: 70.0   # Celsius
+    max_humidity: 95.0      # %
+    
+# System modes and behavior
+modes:
+  # Targeting modes
+  targeting_modes:
+    manual:
+      description: "Manual operator control"
+      auto_engagement: false
+      require_confirmation: true
+      
+    semi_autonomous:
+      description: "Assisted targeting with operator confirmation"
+      auto_engagement: false
+      require_confirmation: true
+      
+    autonomous:
+      description: "Fully autonomous operation"
+      auto_engagement: true
+      require_confirmation: false
+  
+  # Startup behavior
+  startup:
+    auto_initialize: false
+    perform_homing: true
+    initial_scan: false
+    
+# Logging and diagnostics
+logging:
+  level: "info"           # debug, info, warn, error
+  log_to_file: true
+  log_file_path: "/tmp/air_defense.log"
+  max_log_size: "10MB"
+  
+  # Data recording
+  record_data: true
+  data_path: "/tmp/air_defense_data"
+  record_images: false    # Warning: large file sizes
+  
+# Network and communication
+network:
+  # ROS2 configuration
+  domain_id: 42
+  discovery_timeout: 5.0  # seconds
+  
+  # QoS profiles
+  qos:
+    reliable_depth: 10
+    best_effort_depth: 1
+    
+# Competition-specific settings
+competition:
+  # Teknofest rules
+  max_engagement_time: 120  # seconds total
+  max_shots_per_session: 20
+  friendly_fire_penalty: true
+  
+  # Scoring parameters
+  scoring:
+    hit_points: 10
+    miss_penalty: -1
+    friendly_fire_penalty: -20
+    
+# Hardware specifications
+hardware:
+  # Jetson Nano configuration
+  platform: "jetson_nano"
+  gpio_library: "RPi.GPIO"  # or "jetson.gpio"
+  
+  # Performance settings
+  cpu_limit: 80.0         # % max CPU usage
+  memory_limit: 80.0      # % max memory usage
+  temperature_limit: 75.0 # Celsius
+  
+# Development and testing
+development:
+  simulation_mode: false
+  enable_debug_output: false
+  mock_hardware: false
+  test_pattern_enabled: false
+  
+  # Testing parameters
+  test:
+    fake_targets: false
+    target_count: 3
+    movement_simulation: true 

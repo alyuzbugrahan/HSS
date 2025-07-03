@@ -1,0 +1,27 @@
+# ArmSystem.srv - Service to arm the air defense system
+
+# Request
+bool force_arm              # Force arming even with warnings (dangerous!)
+string authorization_code   # Authorization code for arming
+string operator_id         # ID of operator requesting arming
+string mission_type        # Type of mission ("training", "live", "test")
+float32 engagement_zone_min # Minimum engagement angle (degrees)
+float32 engagement_zone_max # Maximum engagement angle (degrees)
+bool enable_auto_mode      # Enable autonomous engagement mode
+uint32 max_engagement_time # Maximum time for engagements (seconds)
+
+---
+
+# Response
+bool success               # True if system was successfully armed
+bool already_armed         # True if system was already armed
+string message            # Human readable status message
+uint32 session_id         # Unique session ID for this armed session
+builtin_interfaces/Time armed_at  # Timestamp when system was armed
+SafetyStatus safety_status # Current safety system status
+
+# System capabilities after arming
+bool autonomous_mode_available  # True if autonomous mode is available
+bool manual_mode_available     # True if manual mode is available
+uint32 estimated_targets       # Number of targets in current field of view
+float32 system_readiness      # System readiness percentage (0.0-100.0) 

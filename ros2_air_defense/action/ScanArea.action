@@ -1,0 +1,39 @@
+# ScanArea.action - Action for scanning an area for targets
+
+# Goal
+float32 scan_azimuth_min   # Minimum azimuth for scan area (degrees)
+float32 scan_azimuth_max   # Maximum azimuth for scan area (degrees)
+float32 scan_elevation_min # Minimum elevation for scan area (degrees)
+float32 scan_elevation_max # Maximum elevation for scan area (degrees)
+float32 scan_speed         # Scanning speed (0.0-1.0)
+uint8 scan_pattern         # Scanning pattern to use
+uint8 PATTERN_RASTER=0     # Raster scan (left-right, top-bottom)
+uint8 PATTERN_SPIRAL=1     # Spiral scan from center outward
+uint8 PATTERN_PRIORITY=2   # Scan based on target priority zones
+uint32 max_scan_time       # Maximum time for scanning (seconds)
+bool return_to_start       # Return to starting position after scan
+float32 dwell_time         # Time to pause at each scan position (seconds)
+
+---
+
+# Result
+bool success               # True if scan completed successfully
+uint32 targets_found       # Total number of targets found during scan
+uint32 enemy_targets_found # Number of enemy targets found
+uint32 positions_scanned   # Number of positions scanned
+float32 scan_coverage      # Percentage of area actually scanned (0.0-100.0)
+builtin_interfaces/Duration total_scan_time # Total time taken for scan
+TargetList discovered_targets # List of all targets discovered during scan
+string result_message      # Human readable result message
+
+---
+
+# Feedback
+float32 current_azimuth    # Current scan position azimuth
+float32 current_elevation  # Current scan position elevation
+float32 scan_progress      # Scan progress (0.0-1.0)
+uint32 targets_found_so_far # Number of targets found so far
+uint32 positions_scanned_so_far # Number of positions scanned so far
+builtin_interfaces/Duration time_remaining # Estimated time remaining
+string current_activity    # Description of current scanning activity
+TargetList targets_in_view # Targets currently visible 

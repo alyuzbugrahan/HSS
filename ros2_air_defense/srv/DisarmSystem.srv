@@ -1,0 +1,19 @@
+# DisarmSystem.srv - Service to disarm the air defense system
+
+# Request
+bool force_disarm           # Force disarming even during active engagement
+string reason              # Reason for disarming
+string operator_id         # ID of operator requesting disarming
+uint32 session_id          # Session ID from when system was armed
+bool return_to_home        # Return motors to home position after disarming
+
+---
+
+# Response
+bool success               # True if system was successfully disarmed
+bool was_armed             # True if system was armed before this call
+string message            # Human readable status message
+builtin_interfaces/Time disarmed_at  # Timestamp when system was disarmed
+uint32 shots_fired_session # Number of shots fired during this session
+uint32 targets_engaged     # Number of targets engaged during this session
+builtin_interfaces/Duration session_duration  # Duration of armed session 

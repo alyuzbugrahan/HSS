@@ -1,0 +1,43 @@
+# EngageTarget.action - Action for engaging a target
+
+# Goal
+uint32 target_id           # ID of target to engage
+float32 target_azimuth     # Target azimuth position
+float32 target_elevation   # Target elevation position
+string target_class        # Target class ("red_balloon", "blue_balloon")
+uint8 engagement_mode      # How to engage the target
+uint8 ENGAGE_SINGLE_SHOT=0 # Single shot engagement
+uint8 ENGAGE_BURST_FIRE=1  # Burst fire engagement
+uint8 ENGAGE_TRACK_ONLY=2  # Track target but don't fire
+bool confirm_before_firing # Require confirmation before firing
+builtin_interfaces/Duration max_engagement_time # Maximum time for engagement
+
+---
+
+# Result
+bool success               # True if target was successfully engaged
+bool target_hit            # True if target appears to have been hit
+uint32 shots_fired         # Number of shots fired during engagement
+float32 final_azimuth      # Final azimuth position during engagement
+float32 final_elevation    # Final elevation position during engagement
+string result_message      # Human readable result message
+builtin_interfaces/Duration engagement_duration # Total time for engagement
+float32 accuracy_estimate  # Estimated accuracy of engagement (0.0-1.0)
+
+---
+
+# Feedback
+uint8 engagement_phase     # Current phase of engagement
+uint8 PHASE_MOVING_TO_TARGET=0   # Moving to target position
+uint8 PHASE_TRACKING_TARGET=1    # Tracking target
+uint8 PHASE_PREPARING_TO_FIRE=2  # Preparing to fire
+uint8 PHASE_FIRING=3             # Firing at target
+uint8 PHASE_ASSESSING_RESULT=4   # Assessing engagement result
+
+float32 current_azimuth    # Current azimuth position
+float32 current_elevation  # Current elevation position
+float32 distance_to_target # Distance to target position (degrees)
+float32 tracking_accuracy  # Current tracking accuracy (0.0-1.0)
+uint32 shots_fired_so_far  # Number of shots fired so far
+builtin_interfaces/Duration time_remaining # Estimated time remaining
+string status_message      # Current status message 

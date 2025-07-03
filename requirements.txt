@@ -1,0 +1,44 @@
+# 🎯 Hava Savunma Sistemi - Python Requirements
+# Compatible with Jetson Nano and standard Linux systems
+
+# Core ML/CV packages
+ultralytics>=8.0.0
+opencv-python>=4.5.0
+numpy>=1.19.0
+Pillow>=8.0.0
+
+# ROS2 Python packages
+rclpy
+sensor-msgs-py
+geometry-msgs-py
+std-msgs-py
+
+# Image processing
+cv-bridge
+image-transport
+
+# GPIO and Hardware (Jetson specific)
+Jetson.GPIO; platform_machine=="aarch64"
+adafruit-circuitpython-gpio; platform_machine=="aarch64"
+
+# Data handling
+dataclasses; python_version<"3.7"
+typing-extensions
+
+# Configuration
+PyYAML>=5.4.0
+configparser
+
+# Networking (for future remote control)
+requests>=2.25.0
+
+# Development and debugging
+psutil
+matplotlib  # for plotting and visualization
+
+# GUI (optional)
+PyQt5>=5.15.0; extra == "gui"
+
+# Testing
+pytest>=6.0.0; extra == "test"
+pytest-cov; extra == "test" 

@@ -1,0 +1,20 @@
+# SetTargetingMode.srv - Service to set targeting mode
+
+# Request
+string targeting_mode      # "manual", "autonomous", "semi_autonomous"
+bool enable_moving_targets # Enable engagement of moving targets
+bool enable_static_targets # Enable engagement of static targets
+float32 confidence_threshold # Minimum confidence for target engagement
+uint32 max_targets         # Maximum number of targets to track simultaneously
+bool friendly_fire_protection # Enable friendly target protection
+string[] target_classes    # Array of target classes to engage ["red_balloon"]
+
+---
+
+# Response
+bool success               # True if mode was successfully set
+string previous_mode       # Previous targeting mode
+string current_mode        # Current targeting mode after change
+string message            # Status message
+uint32 active_targets      # Number of targets currently being tracked
+bool mode_change_allowed   # True if mode changes are currently allowed 

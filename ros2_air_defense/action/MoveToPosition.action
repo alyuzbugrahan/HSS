@@ -1,0 +1,35 @@
+# MoveToPosition.action - Action for moving motors to a specific position
+
+# Goal
+float32 target_azimuth     # Target azimuth angle (-180 to +180 degrees)
+float32 target_elevation   # Target elevation angle (-90 to +90 degrees)
+float32 movement_speed     # Movement speed (0.0-1.0, 1.0=max speed)
+bool synchronized         # True if both motors should move together
+float32 position_tolerance # Acceptable position error (degrees)
+builtin_interfaces/Duration max_movement_time # Maximum time allowed for movement
+bool track_target         # True if continuously tracking a moving target
+uint32 target_id          # ID of target being tracked (if track_target=true)
+
+---
+
+# Result
+bool success              # True if position was reached successfully
+float32 final_azimuth     # Final azimuth position achieved
+float32 final_elevation   # Final elevation position achieved
+float32 position_error    # Final position error (degrees)
+builtin_interfaces/Duration movement_time # Total time taken for movement
+string result_message     # Human readable result message
+bool position_within_tolerance # True if final position is within tolerance
+
+---
+
+# Feedback
+float32 current_azimuth   # Current azimuth position
+float32 current_elevation # Current elevation position
+float32 remaining_azimuth # Remaining azimuth movement (degrees)
+float32 remaining_elevation # Remaining elevation movement (degrees)
+float32 movement_progress # Overall movement progress (0.0-1.0)
+float32 estimated_time_remaining # Estimated time to complete (seconds)
+bool azimuth_moving       # True if azimuth motor is currently moving
+bool elevation_moving     # True if elevation motor is currently moving
+string status_message     # Current movement status 

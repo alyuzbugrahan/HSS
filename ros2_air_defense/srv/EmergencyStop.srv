@@ -1,0 +1,15 @@
+# EmergencyStop.srv - Emergency stop service
+
+# Request
+string reason              # Reason for emergency stop
+string operator_id         # ID of operator triggering emergency stop
+bool stop_all_systems      # Stop all systems including motors
+bool cut_power             # Cut power to weapon systems (if supported)
+
+---
+
+# Response
+bool success               # True if emergency stop was executed
+string message            # Status message
+builtin_interfaces/Time stopped_at  # When emergency stop was triggered
+uint32 systems_stopped     # Number of subsystems that were stopped 

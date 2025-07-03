@@ -1,0 +1,34 @@
+# 🤖 Jetson Nano Özel Requirements
+# ARM64 architecture ve CUDA desteği için optimize edilmiş
+
+# YOLO ve Computer Vision
+ultralytics==8.0.200  # Tested version on Jetson
+opencv-python==4.8.1.78
+numpy==1.21.6  # Compatible with Jetson NumPy
+torch==1.13.0  # Jetson compatible PyTorch
+torchvision==0.14.0
+
+# Jetson Hardware Support
+Jetson.GPIO==2.0.17
+pycuda==2022.1  # CUDA support
+jetson-stats  # Monitoring tools
+
+# ROS2 Dependencies
+rclpy==3.3.7
+sensor_msgs_py
+geometry_msgs_py
+std_msgs_py
+
+# Image Bridge
+cv_bridge
+
+# Configuration and Data
+PyYAML==6.0
+dataclasses==0.8; python_version<"3.7"
+
+# Performance and Monitoring
+psutil==5.9.0
+matplotlib==3.5.3
+
+# Optional GUI Support
+PyQt5==5.15.7 

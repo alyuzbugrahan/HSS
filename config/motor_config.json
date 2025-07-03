@@ -1,0 +1,45 @@
+{
+  "base_motor": {
+    "step_pin": 18,
+    "dir_pin": 19,
+    "enable_pin": 20,
+    "max_speed": 2000,
+    "min_angle": -180.0,
+    "max_angle": 180.0,
+    "microstep": 8
+  },
+  "elevation_motor": {
+    "step_pin": 21,
+    "dir_pin": 22,
+    "enable_pin": 23,
+    "max_speed": 1500,
+    "min_angle": -90.0,
+    "max_angle": 90.0,
+    "microstep": 8
+  },
+  "motor_specs": {
+    "steps_per_rev": 200,
+    "current_rating": "3.0A",
+    "power_rating": "12.5W",
+    "step_angle": "1.8°"
+  },
+  "timing": {
+    "homing_speed": 500,
+    "default_speed": 1000,
+    "max_acceleration": 5000,
+    "stabilization_delay": 0.1
+  },
+  "safety": {
+    "enable_limits": true,
+    "emergency_stop_pin": 24,
+    "home_switch_pins": {
+      "base": 25,
+      "elevation": 26
+    }
+  },
+  "calibration": {
+    "steps_per_degree_base": 5.56,
+    "steps_per_degree_elevation": 5.56,
+    "backlash_compensation": 2
+  }
+} 

@@ -1,0 +1,17 @@
+# HomeMotors.srv - Service to home motor systems
+
+# Request
+bool home_azimuth          # Home azimuth motor
+bool home_elevation        # Home elevation motor
+float32 homing_speed       # Speed for homing operation (0.0-1.0)
+builtin_interfaces/Duration timeout  # Timeout for homing operation
+
+---
+
+# Response
+bool success               # True if homing was successful
+bool azimuth_homed         # True if azimuth motor was successfully homed
+bool elevation_homed       # True if elevation motor was successfully homed
+string message            # Status message
+builtin_interfaces/Duration homing_time  # Time taken for homing
+MotorPosition final_position  # Final motor position after homing 

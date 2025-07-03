@@ -1,0 +1,40 @@
+{
+  "camera": {
+    "horizontal_fov": 60.0,
+    "vertical_fov": 45.0,
+    "image_width": 640,
+    "image_height": 480,
+    "fps": 30,
+    "lens_distortion": {
+      "k1": 0.0,
+      "k2": 0.0,
+      "p1": 0.0,
+      "p2": 0.0
+    }
+  },
+  "mount_offset": {
+    "azimuth_offset": 0.0,
+    "elevation_offset": 0.0,
+    "distance_offset": 5.0,
+    "calibration_notes": "Kamera-namlu alignment offset values. Adjust after physical installation."
+  },
+  "target_classification": {
+    "movement_threshold_pixels": 5.0,
+    "movement_time_window": 0.5,
+    "static_confidence_boost": 10,
+    "moving_priority_boost": 50
+  },
+  "detection_parameters": {
+    "confidence_threshold": 0.7,
+    "nms_threshold": 0.4,
+    "class_names": ["red_balloon", "blue_balloon"],
+    "max_detections": 20
+  },
+  "calibration_instructions": {
+    "step1": "Kamerayı namlu ile hizala",
+    "step2": "Bilinen bir hedefe yönel (ör: 30°, 15°)",
+    "step3": "Pixel koordinatını not et",
+    "step4": "FOV değerlerini hesapla",
+    "step5": "Mount offset'leri ayarla"
+  }
+} 
